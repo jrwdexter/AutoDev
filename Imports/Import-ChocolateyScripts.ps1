@@ -25,11 +25,11 @@ function Install-Chocolatey()
 
 function Get-InstalledPackages()
 {
-    if($global:installedPackages -eq $null)
+    if($script:installedPackages -eq $null)
     {
-        $global:installedPackages = cver all -localonly | Select-Object -Skip 3 | ? { $_ -NotMatch "^\s*$" } | % {New-Object PSObject -Property @{Name = $_ -Replace "^([\w.]*).*","`$1"; Version = $_ -Replace "^.*\s+([0-9.]+)\s*`$","`$1"}}
+        $script:installedPackages = cver all -localonly | Select-Object -Skip 3 | ? { $_ -NotMatch "^\s*$" } | % {New-Object PSObject -Property @{Name = $_ -Replace "^([\w.]*).*","`$1"; Version = $_ -Replace "^.*\s+([0-9.]+)\s*`$","`$1"}}
     }
-    return $global:installedPackages
+    return $script:installedPackages
 }
 
 # Install Chocolatey Packages
@@ -44,7 +44,7 @@ function Install-ChocolateyPackages()
     )
 
     Write-Progress -Activity "Chocolatey Package Installation" -Status "Retrieving Package Information" -PercentComplete $ProgressBegin
-    $packages = (Get-Content (Join-Path $scriptPath "packages.json") | Out-String | ConvertFrom-Json).packages
+    $packages = (Get-Content (Join-Path $scriptPath "../config.json") | Out-String | ConvertFrom-Json).packages
     $packageNum = 0
     foreach($package in $packages)
     {
@@ -61,4 +61,5 @@ function Install-ChocolateyPackages()
         }
     }
     Write-Progress -Activity "Chocolatey Package Installation" -Status "All Packages Installed" -PercentComplete $ProgressEnd
+    $script:installedPackages = $null
 }

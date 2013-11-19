@@ -1,0 +1,59 @@
+{
+    "variables" : [
+        {
+            "name" : "DROPBOX_PATH",
+            "value" : "$env:USERPROFILE/Dropbox"
+        }
+    ],
+
+    "packages" : [
+        { "name" : "ruby", "version" : "1.9.3" },
+        { "name" : "ruby.devkit" },
+        { "name" : "7zip.commandline" },
+        { "name" : "dropbox" },
+        { "name" : "ilspy" },
+        { "name" : "linqpad" },
+        { "name" : "meld" },
+        { "name" : "nodejs.install" },
+        { "name" : "python", "version" : "2.7.3" },
+        { "name" : "scriptcs" },
+        { "name" : "sysinternals" },
+        { "name" : "vagrant" },
+        { "name" : "virtualbox" },
+        { "name" : "vlc" },
+        { "name" : "wireshark" }
+    ],
+
+    "links": [
+        {
+            "Type" : "junction",
+            "Source" : "$env:APPDATA\\.purple",
+            "Target": "$DROPBOX_PATH\\junction-box\\.purple"
+        },
+        {
+            "Type" : "junction",
+            "Source" : "$env:USERPROFILE\\Documents\\Fiddler2",
+            "Target": "$DROPBOX_PATH\\junction-box\\Fiddler2"
+        },
+        {
+            "Type" : "junction",
+            "Source" : "$env:USERPROFILE\\vimfiles",
+            "Target": "$DROPBOX_PATH\\junction-box\\vimfiles"
+        },
+        {
+            "Type" : "junction",
+            "Source" : "$env:USERPROFILE\\Documents\\WindowsPowerShell",
+            "Target": "$DROPBOX_PATH\\junction-box\\WindowsPowerShell"
+        },
+        {
+            "Type" : "hard-link",
+            "Source" : "$env:USERPROFILE\\_vimrc",
+            "Target": "$DROPBOX_PATH\\junction-box\\_vimrc"
+        },
+        {
+            "Type" : "hard-link",
+            "Source" : "$env:USERPROFILE\\.vimrc.local",
+            "Target": "$DROPBOX_PATH\\junction-box\\.vimrc.local"
+        }
+    ]
+}
